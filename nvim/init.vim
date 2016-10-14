@@ -9,6 +9,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'majutsushi/tagbar'
 Plug 'vim-ruby/vim-ruby'
@@ -35,20 +36,19 @@ endif
 " Add plugins to &runtimepath
 call plug#end()
 
-colorscheme jelleybeans
+" colorscheme jelleybeans
+set background=dark
+colorscheme hybrid
 syntax enable
 set nu
 set hlsearch
 set listchars=eol:$,tab:>·,trail:~,extends:>,precedes:<,space:␣
-
-" C/C++ develop config
+set shell=sh
 set shiftwidth=2
 set tabstop=2
 set smartindent
 set expandtab
 " set foldmethod=syntax
-
-" set t_Co=256
 
 " Key mapping for window move operation in normal mode
 nmap <C-h> <C-w>h
@@ -57,10 +57,12 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 
 " Key mapping for C/C++ develop
-map <F2> :NERDTreeToggle<CR>
-map <F3> :Tagbar<CR>
+map <F2> <leader>be 
+map <F3> :NERDTreeToggle<CR>
+map <F4> :Tagbar<CR>
+nmap <F5> :lvimgrep /<C-R>=expand("<cword>")<cr>/ **/*.cc **/*.h<cr><C-o>:lw<cr>
+nmap <F6> :Neomake! make<cr>
 map <C-f> :Denite file_rec<CR>
-map <C-m> <leader>be 
 
 " Key mapping for system clipboard
 vnoremap <C-c> "+y
@@ -123,6 +125,7 @@ let g:neomake_make_maker = {
       \ 'cwd': './build/debug',
       \ 'errorformat': '%f:%l:%c: %m',
       \ }
+let g:neomake_open_list = 2
 
 " Denite config
 " Change mappings
