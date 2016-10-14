@@ -1,4 +1,9 @@
-call plug#begin('~/.vim/plugged')
+" ~/.config/nvim/init.vim
+
+" set plugin base dir
+let s:editor_root=expand("~/.nvim")
+
+call plug#begin('~/.nvim/plugged')
 
 Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
@@ -14,6 +19,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/denite.nvim'
 Plug 'neomake/neomake'
 Plug 'Rip-Rip/clang_complete'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'chazy/cscope_maps'
 
 " ========================================================== "
 "                    PLUGIN SETTINGS                         "
@@ -118,5 +126,23 @@ let g:neomake_make_maker = {
 
 " Denite config
 " Change mappings
-	call denite#custom#map('_', "\<C-j>", 'move_to_next_line')
-	call denite#custom#map('_', "\<C-k>", 'move_to_prev_line')
+call denite#custom#map('_', "\<C-j>", 'move_to_next_line')
+call denite#custom#map('_', "\<C-k>", 'move_to_prev_line')
+" Add custom menus
+let s:menus = {}
+let s:menus.nvim = {
+	\ 'description': 'Edit your nvim configuration'
+	\ }
+let s:menus.nvim.file_candidates = [
+	\ ['init.vim', '~/.config/nvim/init.vim'],
+	\ ['bashrc', '~/.bashrc'],
+	\ ]
+call denite#custom#var('menu', 'menus', s:menus)
+
+" UltiSnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
