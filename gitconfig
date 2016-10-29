@@ -1,0 +1,17 @@
+[user]
+	name = Paul Shu
+	email = paul_shu@keysight.com
+[http]
+	sslverify = false
+[alias]
+	co = checkout
+	br = branch
+	st = status
+	ci = commit
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --branches --remotes
+	type = cat-file -t
+	dump = cat-file -p
+	visual = !git-cola
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches --remotes
+[diff]
+	tool = vimdiff
