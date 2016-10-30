@@ -22,7 +22,7 @@ Plug 'neomake/neomake'
 Plug 'Rip-Rip/clang_complete'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'chazy/cscope_maps'
+Plug 'fntlnz/atags.vim'
 
 " ========================================================== "
 "                    PLUGIN SETTINGS                         "
@@ -149,8 +149,18 @@ call denite#custom#var('menu', 'menus', s:menus)
 
 " UltiSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Atags config
+" Auto update Ctags
+autocmd BufWritePost * call atags#generate()
+" Generate tags only for files that are not in .gitignore
+let g:atags_build_commands_list = [
+    \ 'ag -g "" | ctags -L - --fields=+l -f tags.tmp',
+    \ 'awk "length($0) < 400" tags.tmp > tags',
+    \ 'rm tags.tmp'
+    \ ]
