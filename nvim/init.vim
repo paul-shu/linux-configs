@@ -15,7 +15,7 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-operator-user'
 Plug 'rhysd/vim-clang-format'
-Plug 'vim-scripts/Conque-GDB'
+" Plug 'vim-scripts/Conque-GDB'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/denite.nvim'
 Plug 'neomake/neomake'
@@ -73,7 +73,7 @@ map <C-f> :Denite file_rec<CR>
 vnoremap <C-c> "+y
 
 " vim-clang-format configurations
-let g:clang_format#command = "clang-format-3.6"
+let g:clang_format#command = "clang-format-3.8"
 let g:clang_format#style_options = {
       \ "BasedOnStyle" : "google",
       \ "AllowShortIfStatementsOnASingleLine" : "true",
@@ -96,7 +96,7 @@ nnoremap ,c :s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 " Conque-GDB config
-let g:ConqueGdb_SaveHistory = 0
+" let g:ConqueGdb_SaveHistory = 0
 
 " Use deoplete
 let g:deoplete#enable_at_startup = 1
@@ -156,8 +156,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Atags config
+map <Leader>t :call atags#generate()<cr>
 " Auto update Ctags
-autocmd BufWritePost * call atags#generate()
+" autocmd BufWritePost * call atags#generate()
 " Generate tags only for files that are not in .gitignore
 let g:atags_build_commands_list = [
     \ 'ag -g "" | ctags -L - --fields=+l -f tags.tmp',
