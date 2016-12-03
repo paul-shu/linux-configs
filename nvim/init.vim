@@ -23,6 +23,8 @@ Plug 'Rip-Rip/clang_complete'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'fntlnz/atags.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " ========================================================== "
 "                    PLUGIN SETTINGS                         "
@@ -68,6 +70,9 @@ map <F4> :Tagbar<CR>
 nmap <F5> :lvimgrep /<C-R>=expand("<cword>")<cr>/ **/*.cc **/*.h<cr><C-o>:lw<cr>
 nmap <F6> :Neomake! make<cr>
 map <C-f> :Denite file_rec<CR>
+map <A-a> :Ag <C-r>=expand("<cword>")<cr><cr>
+map <A-b> :Buffers<cr>
+map <A-f> :GFiles<cr>
 
 " Key mapping for system clipboard
 vnoremap <C-c> "+y
