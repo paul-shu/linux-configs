@@ -25,6 +25,7 @@ Plug 'honza/vim-snippets'
 Plug 'fntlnz/atags.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'thinca/vim-visualstar'
 
 " ========================================================== "
 "                    PLUGIN SETTINGS                         "
