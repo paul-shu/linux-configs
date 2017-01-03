@@ -11,7 +11,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-operator-user'
 Plug 'rhysd/vim-clang-format'
@@ -107,11 +107,12 @@ let g:airline#extensions#tabline#enabled = 1
 " Use deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources = {}
-let g:deoplete#sources.c = ['omni', 'buffer', 'member', 'ultisnips', 'tag', 'file']
-let g:deoplete#sources.cpp = ['omni', 'buffer', 'member', 'ultisnips', 'tag', 'file']
+let g:deoplete#sources._ = ['buffer']
+let g:deoplete#sources.c = ['buffer', 'member', 'ultisnips', 'tag', 'file']
+let g:deoplete#sources.cpp = ['buffer', 'member', 'ultisnips', 'tag', 'file']
+" deoplete does not call omnifunc
+let g:deoplete#omni_patterns = {}
 let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " tab complete
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
