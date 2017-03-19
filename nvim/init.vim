@@ -70,10 +70,10 @@ map <F3> :NERDTreeToggle<CR>
 map <F4> :Tagbar<CR>
 nmap <F5> :lvimgrep /<C-R>=expand("<cword>")<cr>/ **/*.cc **/*.h<cr><C-o>:lw<cr>
 nmap <F6> :Neomake! make<cr>
-map <C-f> :Denite file_rec<CR>
-map <A-a> :Ag <C-r>=expand("<cword>")<cr><cr>
-map <A-b> :Buffers<cr>
-map <A-f> :GFiles<cr>
+"map <C-f> :Denite file_rec<CR>
+map <C-g> :Ag <C-r>=expand("<cword>")<cr><cr>
+map <C-b> :Buffers<cr>
+map <C-f> :GFiles<cr>
 
 " Key mapping for system clipboard
 vnoremap <C-c> "+y
