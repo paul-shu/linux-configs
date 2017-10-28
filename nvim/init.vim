@@ -11,11 +11,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jlanzarotta/bufexplorer'
-"Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-operator-user'
 Plug 'rhysd/vim-clang-format'
-" Plug 'vim-scripts/Conque-GDB'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/denite.nvim'
 Plug 'neomake/neomake'
@@ -26,6 +25,7 @@ Plug 'fntlnz/atags.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'thinca/vim-visualstar'
+Plug 'tell-k/vim-autopep8'
 
 " ========================================================== "
 "                    PLUGIN SETTINGS                         "
@@ -39,9 +39,10 @@ endif
 " Add plugins to &runtimepath
 call plug#end()
 
-" colorscheme jelleybeans
 set background=dark
-colorscheme hybrid
+"colorscheme jelleybeans
+"colorscheme hybrid
+colorscheme monokain
 syntax enable
 set nu
 set hlsearch
@@ -51,6 +52,8 @@ set shiftwidth=2
 set tabstop=2
 set smartindent
 set expandtab
+set cursorline
+"set colorcolumn=80
 " set foldmethod=syntax
 
 " Key mapping for window move operation in normal mode
@@ -70,7 +73,7 @@ map <F3> :NERDTreeToggle<CR>
 map <F4> :Tagbar<CR>
 nmap <F5> :lvimgrep /<C-R>=expand("<cword>")<cr>/ **/*.cc **/*.h<cr><C-o>:lw<cr>
 nmap <F6> :Neomake! make<cr>
-"map <C-f> :Denite file_rec<CR>
+" map <C-f> :Denite file_rec<CR>
 map <C-g> :Ag <C-r>=expand("<cword>")<cr><cr>
 map <C-b> :Buffers<cr>
 map <C-f> :GFiles<cr>
@@ -126,18 +129,22 @@ function! s:check_back_space() "{{{
 let g:clang_library_path='/usr/lib/llvm-3.8/lib'
 
 " Neomake config
+let g:neomake_open_list = 2
+let g:neomake_cpp_enabled_makers = ['clangtidy']
+let g:neomake_cpp_clangtidy_args = ['-p', './build', '-extra-arg=c++14']
+
 let g:neomake_cmake_maker = {
       \ 'exe': 'cmake',
-      \ 'cwd': './build/debug',
-      \ 'args': ['-DCMAKE_BUILD_TYPE=Debug', '../..'],
+      \ 'cwd': './build',
+      \ 'args': ['-DCMAKE_BUILD_TYPE=Debug', '..'],
       \ 'errorformat': '%f:%l:%c: %m',
       \ }
 let g:neomake_make_maker = {
       \ 'exe': 'make',
-      \ 'cwd': './build/debug',
+      \ 'cwd': './build',
+      \ 'args': ['-j4'],
       \ 'errorformat': '%f:%l:%c: %m',
       \ }
-let g:neomake_open_list = 2
 
 " Denite config
 " Change mappings
@@ -172,3 +179,9 @@ let g:atags_build_commands_list = [
     \ 'awk "length($0) < 400" tags.tmp > tags',
     \ 'rm tags.tmp'
     \ ]
+
+" Autopep8
+autocmd FileType python set equalprg=autopep8\ -
+autocmd FileType python nnoremap <buffer><Leader>cf :call Autopep8()<CR>
+autocmd FileType python vnoremap <buffer><Leader>cf :call Autopep8()<CR>
+let g:autopep8_disable_show_diff=1
