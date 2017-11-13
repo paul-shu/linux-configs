@@ -41,15 +41,18 @@ call plug#end()
 
 set background=dark
 "colorscheme jelleybeans
-"colorscheme hybrid
-colorscheme monokain
+colorscheme hybrid
+"colorscheme monokain
+"colorscheme atom
+"colorscheme solarized
 syntax enable
-set nu
+set number
+set relativenumber
 set hlsearch
 set listchars=eol:$,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set shell=sh
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set smartindent
 set expandtab
 set cursorline
@@ -69,14 +72,39 @@ nnoremap <C-k> <C-w>k
 
 " Key mapping for C/C++ develop
 map <F2> <leader>be 
-map <F3> :NERDTreeToggle<CR>
-map <F4> :Tagbar<CR>
-nmap <F5> :lvimgrep /<C-R>=expand("<cword>")<cr>/ **/*.cc **/*.h<cr><C-o>:lw<cr>
-nmap <F6> :Neomake! make<cr>
+noremap <F3> :NERDTreeToggle<CR>
+noremap <F4> :Tagbar<CR>
+nnoremap <F5> :lvimgrep /<C-R>=expand("<cword>")<cr>/ **/*.cc **/*.h<cr><C-o>:lw<cr>
+nnoremap <F6> :Neomake! make<cr>
 " map <C-f> :Denite file_rec<CR>
-map <C-g> :Ag <C-r>=expand("<cword>")<cr><cr>
-map <C-b> :Buffers<cr>
-map <C-f> :GFiles<cr>
+noremap <C-g> :Ag <C-r>=expand("<cword>")<cr><cr>
+noremap <C-b> :Buffers<cr>
+noremap <C-f> :GFiles<cr>
+
+" Some useful key mappings
+nnoremap + ddkP
+nnoremap - ddp
+inoremap <leader>u <esc>viwUi
+nnoremap <leader>u viwU
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
+vnoremap <leader>" <esc>a"<esc>`<i"<esc>
+vnoremap <leader>' <esc>a'<esc>`<i'<esc>
+vnoremap <leader>( <esc>a)<esc>`<i(<esc>
+nnoremap H ^
+nnoremap L $
+inoremap jk <esc>
+inoremap <esc> <nop>
+iabbrev @@ paul_shu@keysight.com
+iabbrev ccopy //<cr>// Copyright 2017 Keysight Technologies<cr>//<cr>
+iabbrev ssig -- <cr>Paul Shu<cr>paul_shu@keysight
+augroup special_code_indent
+    autocmd!
+    autocmd FileType cpp,ruby,javascript :setlocal shiftwidth=2 tabstop=2
+augroup END
 
 " Key mapping for system clipboard
 vnoremap <C-c> "+y
@@ -130,7 +158,10 @@ let g:clang_library_path='/usr/lib/llvm-3.8/lib'
 
 " Neomake config
 let g:neomake_open_list = 2
-let g:neomake_cpp_enabled_makers = ['clangtidy']
+let g:neomake_cpp_enabled_makers = ['gcc']
+let g:neomake_cpp_gcc_args = ['-Iinclude', '-std=c++11']
+let g:neomake_cpp_clang_args = ['-Iinclude', '-std=c++11']
+let g:neomake_cpp_clangcheck_args = ['-p', './build']
 let g:neomake_cpp_clangtidy_args = ['-p', './build', '-extra-arg=c++14']
 
 let g:neomake_cmake_maker = {
@@ -185,3 +216,4 @@ autocmd FileType python set equalprg=autopep8\ -
 autocmd FileType python nnoremap <buffer><Leader>cf :call Autopep8()<CR>
 autocmd FileType python vnoremap <buffer><Leader>cf :call Autopep8()<CR>
 let g:autopep8_disable_show_diff=1
+
