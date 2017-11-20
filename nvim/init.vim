@@ -18,7 +18,8 @@ Plug 'rhysd/vim-clang-format'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/denite.nvim'
 Plug 'neomake/neomake'
-Plug 'Rip-Rip/clang_complete'
+"Plug 'Rip-Rip/clang_complete'
+Plug 'zchee/deoplete-clang'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'fntlnz/atags.vim'
@@ -96,8 +97,8 @@ vnoremap <leader>' <esc>a'<esc>`<i'<esc>
 vnoremap <leader>( <esc>a)<esc>`<i(<esc>
 nnoremap H ^
 nnoremap L $
-inoremap jk <esc>
-inoremap <esc> <nop>
+"inoremap jk <esc>
+"inoremap <esc> <nop>
 iabbrev @@ paul_shu@keysight.com
 iabbrev ccopy //<cr>// Copyright 2017 Keysight Technologies<cr>//<cr>
 iabbrev ssig -- <cr>Paul Shu<cr>paul_shu@keysight
@@ -132,18 +133,30 @@ nnoremap ,c :s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g<CR>
 " Airline settings
 let g:airline#extensions#tabline#enabled = 1
 
-" Conque-GDB config
-" let g:ConqueGdb_SaveHistory = 0
+" Deoplete clang
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
+" let g:deoplete#sources#clang#sort_algo = 'alphabetical' "'priority'
+
+" Clang complete
+" let g:clang_library_path='/usr/lib/llvm-3.8/lib/libclang.so'
+" let g:clang_snippets = 1
+" let g:clang_snippets_engine = 'ultisnips'
+" To work with deoplete
+" let g:clang_complete_auto = 0
+" let g:clang_auto_select = 0
+" let g:clang_omnicppcomplete_compliance = 0
+" let g:clang_make_default_keymappings = 0
 
 " Use deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['buffer']
-let g:deoplete#sources.c = ['buffer', 'member', 'ultisnips', 'tag', 'file']
-let g:deoplete#sources.cpp = ['buffer', 'member', 'ultisnips', 'tag', 'file']
-" deoplete does not call omnifunc
-let g:deoplete#omni_patterns = {}
+" let g:deoplete#enable_ignore_case = 'ignorecase'
+" Trigger Omni completion
 let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.md = '<[^>]*'
+let g:deoplete#omni#input_patterns.html = '<[^>]*'
+let g:deoplete#omni#input_patterns.xml  = '<[^>]*'
+let g:deoplete#omni#input_patterns.ruby =  ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'] 
 " tab complete
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
@@ -152,9 +165,6 @@ function! s:check_back_space() "{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
   endfunction "}}}
-
-" Clang complete
-let g:clang_library_path='/usr/lib/llvm-3.8/lib'
 
 " Neomake config
 let g:neomake_open_list = 2
