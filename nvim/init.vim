@@ -20,6 +20,7 @@ Plug 'Shougo/denite.nvim'
 Plug 'neomake/neomake'
 "Plug 'Rip-Rip/clang_complete'
 Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-jedi'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'fntlnz/atags.vim'
@@ -42,7 +43,7 @@ call plug#end()
 
 set background=dark
 "colorscheme jelleybeans
-colorscheme hybrid
+colorscheme gruvbox
 "colorscheme monokain
 "colorscheme atom
 "colorscheme solarized
