@@ -8,6 +8,7 @@
 	br = branch
 	st = status
 	ci = commit
+	df = difftool
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --branches --remotes
 	type = cat-file -t
 	dump = cat-file -p

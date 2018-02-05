@@ -28,6 +28,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'thinca/vim-visualstar'
 Plug 'tell-k/vim-autopep8'
+Plug 'huawenyu/neogdb.vim'
 
 " ========================================================== "
 "                    PLUGIN SETTINGS                         "
@@ -135,8 +136,8 @@ nnoremap ,c :s#\(\%(\<\l\+\)\%(_\)\@=\)\\|_\(\l\)#\u\1\2#g<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 " Deoplete clang
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-5.0/lib/libclang.so.1'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-5.0/lib/clang'
 " let g:deoplete#sources#clang#sort_algo = 'alphabetical' "'priority'
 
 " Clang complete
