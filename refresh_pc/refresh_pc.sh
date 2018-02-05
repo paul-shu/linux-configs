@@ -9,6 +9,7 @@
 # Because it will prompt you for password when sudo permission is required.
 #   ./install_basic_tools.sh | tee install.log
 #==================================================
+CWD=`pwd`
 
 # Shutter screenshot
 sudo add-apt-repository -y ppa:shutter/ppa
@@ -35,22 +36,23 @@ sudo apt install -y cmake
 
 # Git
 sudo apt install -y git
-ln -s ../gitconfig ~/.gitconfig # Git configuration 
+ln -s ${CWD}/../gitconfig ~/.gitconfig # Git configuration 
 
 # Fish shell
 sudo apt install -y fish
 chsh -s /usr/bin/fish # make fish as the default shell
 # Nim style fish prompt
-ln -s ../fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
-
+ln -s ${CWD}/../fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 
 # Tmux
 sudo apt install -y tmux
-ln -s ../tmux.conf ~/.tmux.conf # Tmux configuration
-
+ln -s ${CWD}/../tmux.conf ~/.tmux.conf # Tmux configuration
 
 # Ruby
 sudo apt install -y ruby ruby-dev
+
+# Curl
+sudo apt install -y curl
 
 # Neovim
 if [ -x /usr/bin/nvim ]
@@ -66,7 +68,7 @@ else
   #sudo update-alternatives --config vim
   # Neovim configuration
   curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  ln -s ../nvim/init.vim ~/.config/nvim/init.vim
+  ln -s ${CWD}/../nvim/init.vim ~/.config/nvim/init.vim
   vim -c "PlugInstall" -c "q!" # Install plugins via vim-plug manager
 fi
 
