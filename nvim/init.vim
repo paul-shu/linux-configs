@@ -29,6 +29,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'thinca/vim-visualstar'
 Plug 'tell-k/vim-autopep8'
 Plug 'huawenyu/neogdb.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'mhartington/nvim-typescript'
 
 " ========================================================== "
 "                    PLUGIN SETTINGS                         "
